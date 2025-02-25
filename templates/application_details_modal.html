@@ -1,0 +1,20 @@
+<!-- application_details_modal.html (версия с иконкой карандаша) -->
+<div id="application-modal" class="modal">
+    <div class="modal-content1">
+        <div id="application-details">
+            <div class="main-info-container">
+                <div class="main-info">
+                    <h2 class="main-info-title">
+                        Заявка № ${appData.id} от ${String(appData.reg_day).padStart(2, '0')}/${String(appData.reg_month).padStart(2, '0')}/${appData.reg_year}
+                        <i class="fas fa-pencil-alt edit-icon" onclick="openEditModal('${appData.id}')"></i>
+                    </h2>
+                    <p><b>№, Дата исходящей:</b> ${appData.outgoing_id} от ${String(appData.outgoing_day).padStart(2, '0')}/${String(appData.outgoing_month).padStart(2, '0')}/${appData.outgoing_year}</p>
+                    <p><b>Наименование юр. лица:</b> ${appData.company_name}</p>
+                    <p><b>Предмет закупки:</b> ${appData.purchase_subject}</p>
+                    <p><b>Сумма:</b> ${appData.amount} (руб.)</p>
+                </div>
+            </div>
+            <button onclick="closeApplicationModal()" class="button">Закрыть</button>
+        </div>
+    </div>
+</div>

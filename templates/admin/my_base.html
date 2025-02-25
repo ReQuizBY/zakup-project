@@ -1,0 +1,13 @@
+{% extends 'admin/base.html' %}
+{% block head_tail %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93fJ7E8Ip6YgKns/L4WJ8cJzD4JlSsNMjXbEkVxp9k4Edszjz2CcRnQ1Uj7TcZPXltcW0O+Z6A0KxQD0eYag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block page_body %}
+    <div>
+        {% for locale in locales %}
+            <a href="{{ url_for('set_locale', locale=locale) }}"><span class="flag-icon flag-icon-{{ locale }}"></span></a>
+        {% endfor %}
+    </div>
+    {{ super() }}
+{% endblock %}

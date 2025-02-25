@@ -1,0 +1,19 @@
+<div class="modal editable" id="accountantModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Информация о бухгалтере <i class="fas fa-pencil-alt edit-icon" onclick="toggleEditMode('accountantModal')"></i></h2>
+        </div>
+        <div class="input-group1">
+            <label for="accountantNumber">№:</label>
+            <input type="text" id="accountantNumber" value="" disabled><br><br>
+            <label for="accountantDate">Дата плат. поручения:</label>
+            <input type="date" id="accountantDate" value="" disabled><br><br>
+            <label for="accountantAmount">Сумма:</label>
+            <input type="number" id="accountantAmount" value="" disabled><br><br>
+            <label for="accountantComment">Комментарий:</label>
+            <textarea id="accountantComment" disabled></textarea><br><br>
+            <button type="button" class="button button-primary" onclick="saveAccountantData(currentAppId)">Сохранить</button>
+            <button type="button" class="button button-secondary button-flat-red" onclick="closeAccountantModal()">Закрыть</button>
+        </div>
+    </div>
+</div>

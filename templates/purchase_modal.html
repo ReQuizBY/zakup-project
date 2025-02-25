@@ -1,0 +1,21 @@
+<div class="modal editable" id="purchaseModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Информация о закупке <i class="fas fa-pencil-alt edit-icon" onclick="toggleEditMode('purchaseModal')"></i></h2>
+        </div>
+        <div class="input-group1">
+            <label for="purchaseNumber">№:</label>
+            <input type="text" id="purchaseNumber" value="" disabled><br><br>
+            <label for="purchaseDate">Дата:</label>
+            <input type="date" id="purchaseDate" value="" disabled><br><br>
+            <label for="purchaseType">Вид закупки:</label>
+            <input type="text" id="purchaseType" value="" disabled><br><br>
+            <label for="purchaseAmount">Сумма:</label>
+            <input type="number" id="purchaseAmount" value="" disabled><br><br>
+            <label for="purchaseTerms">Сроки закупки:</label>
+            <input type="text" id="purchaseTerms" value="" disabled><br><br>
+            <button type="button" class="button button-primary" onclick="savePurchaseData(currentAppId)">Сохранить</button>
+            <button type="button" class="button button-secondary button-flat-red" onclick="closePurchaseModal()">Закрыть</button>
+        </div>
+    </div>
+</div>

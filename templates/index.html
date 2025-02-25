@@ -1,0 +1,229 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система закупок</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='application_details_modal.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="icon" href="{{ url_for('static', filename='icon.ico') }}">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>🛒 Заявки на закупку</h1>
+        <div>
+            <input type="text" id="search" placeholder="Поиск..." oninput="filterTable()">
+            <button class="button button-primary" onclick="openModal()">+ Новая заявка</button>
+            <button class="button button-secondary" onclick="exportToExcel()">📥 Экспорт EXEL</button>
+        </div>
+    </header>
+
+    <!-- Подключаем модальное окно "Новая заявка" -->
+    {% include '_new_application_modal.html' %}
+
+    <!-- Подключаем модальное окно с информацией о заявке -->
+    {% include 'application_details_modal.html' %}
+
+    <!-- Подключаем модальное окно "Редактировать заявку" -->
+    {% include '_edit_application_modal.html' %}
+
+    <!-- Подключаем модальные окна для каждого столбца -->
+    {% include 'economist_modal.html' %}
+    {% include 'purchase_modal.html' %}
+    {% include 'exec_docs_modal.html' %}
+    {% include 'lawyer_modal.html' %}
+    {% include 'accountant_modal.html' %}
+
+    <!-- Основная таблица -->
+    <div class="table-wrapper">
+        <table class="table" id="application-table">
+            <thead>
+<tr>
+    <th class="table-header-num">№</th>
+    <th class="table-header-reg">№, Дата регистрации</th>
+    <th class="table-header-outgoing">№, Дата исходящей</th>
+    <th class="table-header-company">Наименование юр. лица подавшего заявку</th>
+    <th class="table-header-subject">Предмет закупки, Сумма</th>
+    <th class="table-header-economist">Экономисты</th>
+    <th class="table-header-purchase">Закупки</th>
+    <th class="table-header-docs">Исполнительная документация</th>
+    <th class="table-header-lawyer">Юрист</th>
+    <th class="table-header-accountant">Бухгалтер</th>
+</tr>
+            </thead>
+            <tbody>
+            {% for app in applications %}
+                <tr data-app-id="{{ app['id'] }}"
+                    data-reg-day="{{ app['reg_day'] }}"
+                    data-reg-month="{{ app['reg_month'] }}"
+                    data-reg-year="{{ app['reg_year'] }}"
+                    data-outgoing-id="{{ app['outgoing_id'] }}"
+                    data-outgoing-day="{{ app['outgoing_day'] }}"
+                    data-outgoing-month="{{ app['outgoing_month'] }}"
+                    data-outgoing-year="{{ app['outgoing_year'] }}"
+                    data-company-name="{{ app['company_name'] }}"
+                    data-purchase-subject="{{ app['purchase_subject'] }}"
+                    data-amount="{{ app['amount'] }}"
+                    data-economist-info="{{ app['economist_info'] }}"
+                    data-purchase-info="{{ app['purchase_info'] }}"
+                    data-exec-docs-info="{{ app['exec_docs_info'] }}"
+                    data-lawyer-info="{{ app['lawyer_info'] }}"
+                    data-accountant-info="{{ app['accountant_info'] }}">
+
+                    <td></td> <!-- This cell will contain the row number -->
+                    <td><b>№ {{ app['id'] }}</b> от {{ "%02d"|format(app['reg_day']) }}/{{ "%02d"|format(app['reg_month']) }}/{{ app['reg_year'] }}</td>
+                    <td><b>№ {{ app['outgoing_id'] }}</b> от {{ "%02d"|format(app['outgoing_day']) }}/{{ "%02d"|format(app['outgoing_month']) }}/{{ app['outgoing_year'] }}</td>
+                    <td><center>{{ app['company_name'] }}</center></td>
+                    <td>{{ app['purchase_subject'] }}</br><b>{{ app['amount'] }} руб.</b>
+                         Подробнее <i class="fas fa-info-circle" style="color:#689F38;"></i></td>
+
+                    <!-- Ячейки с модальными окнами -->
+                    <td class="editable-cell economist-cell" data-column="economist_info"
+                        data-app-id="{{ app['id'] }}"
+                        data-economist-info="{{ app['economist_info'] }}">
+                        {% if app['economist_status'] == 'complete' %}
+                            <span class="status-indicator status-complete"><i class="fas fa-check-circle"></i></span>
+                        {% elif app['economist_status'] == 'partial' %}
+                            <span class="status-indicator status-partial"><i class="fas fa-spinner fa-spin"></i></span>
+                        {% else %}
+                            <span class="status-indicator status-empty">-----</span>
+                        {% endif %}
+                    </td>
+                    <td class="editable-cell purchase-cell" data-column="purchase_info"
+                        data-app-id="{{ app['id'] }}"
+                        data-purchase-info="{{ app['purchase_info'] }}">
+                        {% if app['purchase_status'] == 'complete' %}
+                            <span class="status-indicator status-complete"><i class="fas fa-check-circle"></i></span>
+                        {% elif app['purchase_status'] == 'partial' %}
+                            <span class="status-indicator status-partial"><i class="fas fa-spinner fa-spin"></i></span>
+                        {% else %}
+                            <span class="status-indicator status-empty">-----</span>
+                        {% endif %}
+                    </td>
+                    <td class="editable-cell docs-cell" data-column="exec_docs_info" data-app-id="{{ app['id'] }}"
+                        data-exec-docs-info="{{ app['exec_docs_info'] }}">
+                        {% if app['exec_docs_status'] == 'complete' %}
+                            <span class="status-indicator status-complete"><i class="fas fa-check-circle"></i></span>
+                        {% elif app['exec_docs_status'] == 'partial' %}
+                            <span class="status-indicator status-partial"><i class="fas fa-spinner fa-spin"></i></span>
+                        {% else %}
+                            <span class="status-indicator status-empty"></span>
+                        {% endif %}
+                    </td>
+                    </td>
+                    <td class="editable-cell lawyer-cell" data-column="lawyer_info" data-app-id="{{ app['id'] }}"
+                        data-lawyer-info="{{ app['lawyer_info'] }}">
+                        {% if app['lawyer_status'] == 'complete' %}
+                            <span class="status-indicator status-complete"><i class="fas fa-check-circle"></i></span>
+                        {% elif app['lawyer_status'] == 'partial' %}
+                            <span class="status-indicator status-partial"><i class="fas fa-spinner fa-spin"></i></span>
+                        {% else %}
+                            <span class="status-indicator status-empty">-----</span>
+                        {% endif %}
+                    </td>
+                    <td class="editable-cell accountant-cell" data-column="accountant_info"
+                        data-app-id="{{ app['id'] }}"
+                        data-accountant-info="{{ app['accountant_info'] }}">
+                        {% if app['accountant_status'] == 'complete' %}
+                            <span class="status-indicator status-complete"><i class="fas fa-check-circle"></i></span>
+                        {% elif app['accountant_status'] == 'partial' %}
+                            <span class="status-indicator status-partial"><i class="fas fa-spinner fa-spin"></i></span>
+                        {% else %}
+                            <span class="status-indicator status-empty">-----</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+<script src="{{ url_for('static', filename='js/application_modal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/application_details_modal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('search').addEventListener('input', filterTable);
+    });
+
+    document.querySelectorAll('.economist-cell').forEach(cell => {
+        cell.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const appId = this.dataset.appId;
+            const economistInfo = this.dataset.economistInfo || '{}';
+            openEconomistModal(appId, economistInfo);
+        });
+    });
+
+    document.querySelectorAll('.purchase-cell').forEach(cell => {
+        cell.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const appId = this.dataset.appId;
+            const purchaseInfo = this.dataset.purchaseInfo || '{}';
+            openPurchaseModal(appId, purchaseInfo);
+        });
+    });
+
+    document.querySelectorAll('.docs-cell').forEach(cell => {
+        cell.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const appId = this.dataset.appId;
+            const execDocsInfo = this.dataset.execDocsInfo || '{}';
+            openExecDocsModal(appId, execDocsInfo);
+        });
+    });
+
+    document.querySelectorAll('.lawyer-cell').forEach(cell => {
+        cell.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const appId = this.dataset.appId;
+            const lawyerInfo = this.dataset.lawyerInfo || '{}';
+            openLawyerModal(appId, lawyerInfo);
+        });
+    });
+
+    document.querySelectorAll('.accountant-cell').forEach(cell => {
+        cell.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const appId = this.dataset.appId;
+            const accountantInfo = this.dataset.accountantInfo || '{}';
+            openAccountantModal(appId, accountantInfo);
+        });
+    });
+
+    function setupRowClickHandlers() {
+        console.log('setupRowClickHandlers is called');
+        document.querySelectorAll('#application-table tbody tr').forEach(row => {
+            row.addEventListener('click', function (event) {
+                event.stopPropagation();
+                const appId = this.dataset.appId;
+                const appData = {
+                    id: this.dataset.appId,
+                    reg_day: this.dataset.regDay,
+                    reg_month: this.dataset.regMonth,
+                    reg_year: this.dataset.regYear,
+                    outgoing_id: this.dataset.outgoingId,
+                    outgoing_day: this.dataset.outgoingDay,
+                    outgoing_month: this.dataset.outgoingMonth,
+                    outgoing_year: this.dataset.outgoingYear,
+                    company_name: this.dataset.companyName,
+                    purchase_subject: this.dataset.purchaseSubject,
+                    amount: this.dataset.amount,
+                    economistInfo: this.dataset.economistInfo,
+                    purchaseInfo: this.dataset.purchaseInfo,
+                    execDocsInfo: this.dataset.execDocsInfo,
+                    lawyerInfo: this.dataset.lawyerInfo,
+                    accountantInfo: this.dataset.accountantInfo
+                };
+                openApplicationModal(appId, appData);
+            });
+        });
+    }
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="modal editable" id="execDocsModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Информация об исполнительной документации <i class="fas fa-pencil-alt edit-icon" onclick="toggleEditMode('execDocsModal')"></i></h2>
+        </div>
+        <div class="input-group1">
+            <label for="docsDescription">Описание документации:</label>
+            <textarea id="docsDescription" disabled></textarea><br><br>
+            <label for="docsStatus">Статус выполнения:</label>
+            <input type="text" id="docsStatus" value="" disabled><br><br>
+            <label for="docsComments">Комментарии:</label>
+            <textarea id="docsComments" disabled></textarea><br><br>
+            <button type="button" class="button button-primary" onclick="saveExecDocsData(currentAppId)">Сохранить</button>
+            <button type="button" class="button button-secondary button-flat-red" onclick="closeExecDocsModal()">Закрыть</button>
+        </div>
+    </div>
+</div>

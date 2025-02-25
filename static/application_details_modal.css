@@ -1,0 +1,188 @@
+/* application_details_modal.css - Two Column Layout, Docs Inline, Green Title, Text Wrap */
+
+#application-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(100, 100, 100, 0.3);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: auto;
+  padding: 10px;
+}
+
+.modal-content1 {
+  position: relative;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  max-width: 95%;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: #f5f5f5;
+  color: #555;
+}
+
+/* Container for main info and exec docs */
+.main-info-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+/* Основная информация слева */
+.main-info {
+  text-align: left;
+  width: 50%;
+  padding-right: 15px;
+}
+
+.main-info h2 {
+  font-size: 1.7em;
+  font-weight: 700;
+  color: #5E35B1;
+  margin-bottom: 8px;
+}
+
+.main-info p {
+  font-size: 0.95em;
+  margin-bottom: 6px;
+  white-space: normal; /* **Enable text wrapping** */
+  overflow: visible; /* **Show the full text** */
+  text-overflow: clip; /* **Disable text overflow** */
+}
+
+/* Исполнительная документация (справа от основной информации) */
+.exec-docs-info {
+  width: 50%;
+  padding-left: 15px;
+}
+
+.exec-docs-info h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #27ae60;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #2ecc71;
+  padding-bottom: 4px;
+}
+
+.exec-docs-info p {
+  font-size: 0.85em;
+  color: #555;
+  margin-bottom: 4px;
+  white-space: normal; /* **Enable text wrapping** */
+  overflow: visible; /* **Show the full text** */
+  text-overflow: clip; /* **Disable text overflow** */
+}
+
+/* Данные из модальных окон (одна строка) */
+.modal-data {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modal-data::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-column {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  padding: 15px;
+  border-radius: 6px;
+  background-color: #fff;
+  margin-right: 10px;
+}
+
+.modal-column h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #5E35B1;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #7986CB;
+  padding-bottom: 4px;
+}
+
+.modal-column p {
+  font-size: 0.85em;
+  color: #555;
+  margin-bottom: 4px;
+  white-space: normal; /* Enable text wrapping */
+  overflow: visible; /* Show all text */
+  text-overflow: clip; /* Disable text overflow */
+  word-break: break-word; /* Handle long words */
+}
+
+/* Стили для кнопок */
+#application-modal button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background-color: #5E35B1;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+#application-modal button:hover {
+  background-color: #4527A0;
+}
+
+/* Стили для кнопки закрытия */
+#application-modal .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  color: #B0BEC5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .modal-content1 {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .main-info,
+  .exec-docs-info {
+    width: 100%;
+    text-align: left;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .modal-data {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .modal-column {
+    width: 200px;
+  }
+
+  #application-modal button {
+    padding: 8px 16px;
+    font-size: 0.8em;
+    margin-top: 20px;
+  }
+}

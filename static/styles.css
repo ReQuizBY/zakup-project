@@ -1,0 +1,416 @@
+/* styles.css - Unified Theme, Gray Stripes, Vertical Dividers */
+
+:root {
+  --primary-color: #2196F3;
+  --background: #f5f5f5;
+  --text-color: #555;
+  --error: #f44336;
+  --border-color: #ddd;
+  --table-column-max-width: 200px; /*  Установите желаемую максимальную ширину */
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif; /* Шрифт текста */
+  margin: 0;                           /* Убираем отступы */
+  background: var(--background);        /* Цвет фона из переменной */
+  color: var(--text-color);           /* Цвет текста из переменной */
+}
+
+.container {
+  max-width: 99%;                   /* Максимальная ширина контейнера */
+  margin: 0 auto;                     /* Центрируем контейнер */
+  padding: 10px;                       /* Отступы внутри контейнера */
+}
+
+.header {
+  display: flex;                     /* Используем Flexbox для выравнивания элементов */
+  justify-content: space-between;   /* Равномерное распределение элементов по горизонтали */
+  align-items: center;              /* Выравнивание элементов по вертикали по центру */
+  margin-bottom: 30px;                /* Отступ снизу */
+  padding: 20px;                       /* Отступы внутри хедера */
+  background: white;                  /* Белый фон */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Тень */
+  border-radius: 8px;                  /* Закругленные углы */
+}
+
+/* Адаптивные стили для экрана шириной до 768px */
+@media screen and (max-width: 768px) {
+  .table th,
+  .table td {
+    padding: 10px 15px;                 /* Уменьшаем отступы в ячейках */
+    font-size: 14px;                    /* Уменьшаем размер шрифта */
+  }
+
+  .header th {
+    min-width: 150px !important;     /* Минимальная ширина для заголовков */
+  }
+}
+
+.button {
+  padding: 10px 20px;                 /* Отступы внутри кнопки */
+  border: none;                        /* Убираем границу */
+  border-radius: 4px;                  /* Закругленные углы */
+  cursor: pointer;                     /* Меняем курсор при наведении */
+  transition: 0.3s;                    /* Плавный переход */
+  font-weight: 500;                   /* Полужирный шрифт */
+}
+
+.button-secondary {
+  background-color: #9575CD;        /* Серый цвет фона */
+  color: white;                      /* Белый цвет текста */
+}
+
+.button-primary {
+  background: var(--primary-color);     /* Цвет фона из переменной */
+  color: white;                      /* Белый цвет текста */
+}
+
+.button-secondary:hover {
+  background-color: #27ae60;        /* Более темный серый при наведении */
+}
+
+.button-primary:hover {
+  background: #27ae60;               /* Изменение цвета при наведении */
+}
+
+/*Стили для кнопки danger, предположительно не используется в index.html, удаляю */
+/*
+.button-danger {
+  background: var(--error);
+  color: white;
+  margin-left: 10px;
+}
+*/
+
+.table {
+  width: 100%;                           /* Ширина таблицы 100% */
+  min-width: 100%;                       /* Минимальная ширина таблицы 100% */
+  border-collapse: collapse;              /* Убираем двойные границы */
+  background: white;                      /* Белый фон */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);   /* Тень */
+  table-layout: fixed;                   /* Фиксированная раскладка таблицы */
+}
+
+.table th {
+   background: #9575CD;                  /* Цвет фона заголовков */
+   color: white;                          /* Белый цвет текста */
+   font-size: 14px;                        /* Размер шрифта */
+   cursor: pointer;                         /* Меняем курсор при наведении */
+   text-align: center;                      /* Выравнивание текста по центру */
+}
+
+.table td {
+    padding: 10px 20px;                     /* Отступы внутри ячеек */
+    font-size: 14px;                        /* Размер шрифта */
+    position: relative;                    /* Относительное позиционирование */
+    cursor: pointer;                         /* Меняем курсор при наведении */
+    word-wrap: break-word;                 /* Перенос слов, если они не помещаются */
+    overflow-wrap: break-word;             /* Альтернативный перенос слов */
+    max-width: var(--table-column-max-width); /* Используем CSS переменную */
+}
+
+/* Add vertical divider */
+.table td::after {
+  content: '';                        /* Обязательно для псевдоэлементов */
+  position: absolute;                 /* Абсолютное позиционирование */
+  top: 20%;                          /* Позиционирование сверху */
+  bottom: 20%;                       /* Позиционирование снизу */
+  right: 0;                           /* Справа */
+  width: 1px;                        /* Ширина разделителя */
+  background: #ddd;                   /* Цвет разделителя */
+}
+
+/* Remove divider from the last cell */
+.table tr td:last-child::after {
+  content: none;                    /* Убираем разделитель в последней ячейке */
+}
+
+/* Общие стили для ячеек таблицы (th и td) */
+.table th, .table td {
+    word-wrap: break-word;       /* Перенос длинных слов */
+    overflow-wrap: break-word;   /* Дополнительный перенос длинных слов (для старых браузеров) */}
+
+/* Общие стили для заголовков таблицы */
+.table th {
+    background: #9575CD;                  /* Цвет фона заголовков */
+    color: white;                          /* Белый цвет текста */
+    font-size: 14px;                        /* Размер шрифта */
+    cursor: pointer;                         /* Меняем курсор при наведении */
+    text-align: center; /* Центрируем текст в заголовках */
+    padding: 10px;       /* Добавляем немного отступов */
+}
+
+/* Стили для конкретных столбцов */
+.table-header-num { width: 10px; }       /* Ширина столбца "№" */
+.table-header-reg { width: 50px; }       /* Ширина столбца "№, Дата регистрации" */
+.table-header-outgoing { width: 50px; }    /* Ширина столбца "№, Дата исходящей" */
+.table-header-company { width: 80px; }     /* Ширина столбца "Наименование юр. лица" */
+.table-header-subject { width: 150px; }    /* Ширина столбца "Предмет закупки, Сумма" */
+.table-header-economist { width: 50px; }    /* Ширина столбца "Экономисты" */
+.table-header-purchase { width: 50px; }     /* Ширина столбца "Закупки" */
+.table-header-docs { width: 50px; }        /* Ширина столбца "Исполнительная документация" */
+.table-header-lawyer { width: 50px; }       /* Ширина столбца "Юрист" */
+.table-header-accountant { width: 50px; }    /* Ширина столбца "Бухгалтер" */
+
+.table-wrapper {
+  overflow-x: auto;                 /* Горизонтальная полоса прокрутки */
+  background: white;                  /* Белый фон */
+  border-radius: 8px;                  /* Закругленные углы */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12); /* Тень */
+  position: relative;                /* Относительное позиционирование */
+  z-index: 10;                       /* Z-index для фиксации таблицы */
+}
+
+.table tr:last-child td {
+  border-bottom: none;             /* Убираем нижнюю границу в последней строке */
+}
+
+/* Чередование цветов строк */
+.table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;        /* Светло-серый фон для нечетных строк */
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #ffffff;        /* Белый фон для четных строк */
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef;        /* Более темный серый при наведении */
+}
+
+.modal {
+  display: none;                     /* Скрываем модальное окно */
+  position: fixed;                  /* Фиксированное позиционирование */
+  top: 0;                           /* Сверху */
+  left: 0;                          /* Слева */
+  width: 100%;                       /* Ширина 100% */
+  height: 100%;                      /* Высота 100% */
+  background: rgba(0,0,0,0.5);       /* Полупрозрачный фон */
+  justify-content: center;          /* Выравнивание по центру */
+  align-items: center;             /* Выравнивание по центру */
+  z-index: 1000;                    /* Z-index для отображения поверх всего */
+}
+
+.modal-content {
+  background: white;                  /* Белый фон */
+  padding: 25px;                       /* Отступы внутри модального окна */
+  border-radius: 8px;                  /* Закругленные углы */
+  width: 500px;                      /* Ширина модального окна */
+  max-width: 90%;                    /* Максимальная ширина 90% */
+  position: relative;                /* Относительное позиционирование */
+  z-index: 1001;                    /* Z-index для контента модалки */
+}
+
+.input-group {
+  margin-bottom: 10px;                /* Отступ снизу */
+}
+
+.input-group1 {
+  margin-bottom: 10px;                /* Отступ снизу */
+}
+
+.input-group2 {
+  margin-bottom: 10px;                /* Отступ снизу */
+}
+
+.input-summ {
+  margin-bottom: 10px;                /* Отступ снизу */
+}
+
+.input-group input {
+  width: 100px;                      /* Ширина поля ввода */
+  padding: 10px;                       /* Отступы внутри поля ввода */
+  border: 1px solid #ddd;             /* Граница */
+  border-radius: 4px;                  /* Закругленные углы */
+  box-sizing: border-box;            /* Учитываем границу в ширине */
+}
+
+.input-group1 input {
+  width: 300px;                      /* Ширина поля ввода */
+  padding: 10px;                       /* Отступы внутри поля ввода */
+  border: 1px solid #ddd;             /* Граница */
+  border-radius: 4px;                  /* Закругленные углы */
+  box-sizing: border-box;            /* Учитываем границу в ширине */
+}
+
+.input-group2 input {
+  width: 100px;                      /* Ширина поля ввода */
+  padding: 10px;                       /* Отступы внутри поля ввода */
+  border: 1px solid #ddd;             /* Граница */
+  border-radius: 4px;                  /* Закругленные углы */
+  box-sizing: border-box;            /* Учитываем границу в ширине */
+}
+
+.input-summ input {
+  width: 100px;                      /* Ширина поля ввода */
+  padding: 10px;                       /* Отступы внутри поля ввода */
+  border: 1px solid #ddd;             /* Граница */
+  border-radius: 4px;                  /* Закругленные углы */
+  box-sizing: border-box;            /* Учитываем границу в ширине */
+}
+
+.date-group {
+  margin-bottom: 15px;                /* Отступ снизу */
+  padding: 15px;                       /* Отступы внутри */
+  background: #f8f9fa;              /* Цвет фона */
+  border-radius: 6px;                  /* Закругленные углы */
+}
+
+.date-group h3 {
+  margin-top: 0;                      /* Убираем отступ сверху */
+  margin-bottom: 10px;               /* Отступ снизу */
+  color: #2196F3;                 /* Цвет текста */
+  font-size: 16px;                    /* Размер шрифта */
+}
+
+.date-fields {
+  display: grid;                     /* Используем Grid Layout */
+  grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+  gap: 10px;                         /* Отступы между элементами */
+}
+
+.date-fields .input-group {
+  margin-bottom: 0;                  /* Убираем отступ снизу */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;         /* Убираем стрелки в input type="number" в Chrome */
+  margin: 0;                           /* Убираем отступы */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;        /* Убираем стрелки в input type="number" в Firefox */
+}
+
+/*Стили для progress bar, предположительно не используется в index.html, удаляю */
+/*
+Подсказка при наведении
+.progress-container:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+*/
+
+/* Стили для редактируемых ячеек */
+.editable-cell {
+  cursor: pointer;                   /* Меняем курсор при наведении */
+  transition: background-color 0.2s;   /* Плавный переход цвета фона */
+  text-align: center;                  /* Горизонтальное выравнивание */
+  height: auto; /* Важно: Убираем фиксированную высоту */
+  min-height: 20px; /* Минимальная высота, чтобы контент не слипался, можно настроить */
+}
+
+textarea {
+  width: 100%;                       /* Ширина 100% */
+  padding: 10px;                       /* Отступы внутри */
+  border: 1px solid #ddd;             /* Граница */
+  border-radius: 4px;                  /* Закругленные углы */
+  resize: vertical;                   /* Разрешаем изменение высоты */
+  min-height: 100px;                  /* Минимальная высота */
+}
+
+#search {
+  padding: 0.375rem 0.75rem;        /* Отступы внутри поля поиска */
+  font-size: 1rem;                    /* Размер шрифта */
+  font-weight: 400;                   /* Толщина шрифта */
+  line-height: 1.5;                  /* Высота строки */
+  color: #495057;                 /* Цвет текста */
+  background-color: #fff;            /* Белый цвет фона */
+  background-clip: padding-box;      /* Обрезаем фон под отступы */
+  border: 1px solid #ced4da;          /* Граница */
+  border-radius: 0.25rem;              /* Закругленные углы */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Плавные переходы */
+  height: 23px                        /* Фиксированная высота поля поиска */
+}
+
+#search:focus {
+  color: #495057;                 /* Цвет текста при фокусе */
+  background-color: #fff;            /* Белый цвет фона при фокусе */
+  border-color: #80bdff;             /* Цвет границы при фокусе */
+  outline: 0;                         /* Убираем обводку */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Тень при фокусе */
+}
+
+.edit-icon {
+  cursor: pointer;                   /* Меняем курсор при наведении */
+  margin-left: 10px;                /* Отступ слева */
+  color: #555;                      /* Цвет иконки */
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; /* Плавный переход */
+}
+
+.edit-icon:hover {
+  transform: scale(1.2) rotate(10deg); /* Увеличение и поворот при наведении */
+  color: #3498db;                 /* Изменение цвета при наведении */
+}
+
+.table th:first-child,
+.table td:first-child {
+  text-align: center;                  /* Горизонтальное выравнивание по центру */
+  vertical-align: middle;             /* Вертикальное выравнивание по центру */
+}
+
+.status-indicator {
+    display: inline-block;
+    width: auto; /* Автоматическая ширина, чтобы вместить текст и иконки */
+    height: auto; /* Важно: убираем фиксированную высоту */
+    text-align: center;
+    line-height: normal; /* Важно: убираем line-height */
+    margin-left: 5px;
+    font-size: 14px; /* Размер текста и иконок */
+    vertical-align: middle; /* Выравнивание по вертикали */
+}
+
+.status-complete {
+  color: #689F38;                 /* Зеленый цвет для текста */
+  font-size: 20px;                   /* Размер шрифта */
+}
+
+.status-partial {
+  color: #9575CD;                 /* Феолетовый цвет для текста */
+  font-size: 20px;                   /* Размер шрифта */
+}
+
+.status-empty {
+  color: #616161;                 /* Серый цвет для текста */
+  font-size: 20px;                   /* Размер шрифта */
+}
+
+
+/* Регистрация */
+.form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.errors {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    color: red;
+}
+
+.errors li {
+    font-size: 0.9em;
+}

@@ -1,0 +1,104 @@
+<!-- _edit_application_modal.html -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Редактировать заявку</h2>
+        </div>
+        <form id="editForm" method="POST" enctype="multipart/form-data" onsubmit="return submitEditForm(event)">
+
+            <!-- Блок входящей заявки -->
+            <div class="date-group">
+                <h3>№ и дата регистрации заявки:</h3>
+                <div class="input-group2">
+                    <input type="text" name="id" id="editId" placeholder="01-01" required>
+                </div>
+                <div class="date-fields">
+                    <div class="input-group">
+                        <input type="number" name="reg_day" id="editRegDay" placeholder="День" min="1" max="31" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" name="reg_month" id="editRegMonth" placeholder="Месяц" min="1" max="12" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" name="reg_year" id="editRegYear" placeholder="Год" min="2000" max="2100" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок исходящей заявки -->
+            <div class="date-group">
+                <h3>№ и дата исходящей заявки:</h3>
+                <div class="input-group">
+                    <input type="text" name="outgoing_id" id="editOutgoingId" placeholder="01-01" required>
+                </div>
+                <div class="date-fields">
+                    <div class="input-group">
+                        <input type="number" name="outgoing_day" id="editOutgoingDay" placeholder="День" min="1" max="31" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" name="outgoing_month" id="editOutgoingMonth" placeholder="Месяц" min="1" max="12" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" name="outgoing_year" id="editOutgoingYear" placeholder="Год" min="2000" max="2100"
+                               required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основные поля -->
+            <div class="input-group1">
+                <input type="text" name="company" id="editCompany" placeholder="Наименование юр. лица подавшего заявку:" list="editCompanyList" required>
+                <datalist id="editCompanyList">
+                    <option value="Центр">
+                    <option value="Отдел образования">
+                    <option value="РУМК">
+                    <option value="Князевская СШ">
+                    <option value="Голынковская СШ">
+                    <option value="Елковская СШ">
+                    <option value="Каролинская СШ">
+                    <option value="Деречинская СШ">
+                    <option value="Мижеричская базовая школа">
+                    <option value="Бородичская начальная школа">
+                    <option value="Ялуцевичи детский сад">
+                    <option value="Острово детский сад">
+                    <option value="ЦТДиМ">
+                    <option value="ЦКРОиР">
+                    <option value="СПЦ">
+                    <option value="ДЦРР №1">
+                    <option value="ДЦРР Елка">
+                    <option value="Детский сад №3">
+                    <option value="Детский сад №4">
+                    <option value="Лагерь Голубая волна">
+                    <option value="Сектор Культуры">
+                    <option value="Центр культуры и народного творчества">
+                    <option value="Районная библиотека">
+                    <option value="Детская школа исскуств">
+                    <option value="Гимназия № 1">
+                    <option value="СШ № 3">
+                    <option value="ДЮСШ">
+                    <option value="ФОСЦ">
+                    <option value="Сынковичский СИК">
+                    <option value="Кремяницкий СИК">
+                    <option value="Зельвенский СИК">
+                    <option value="Каролинский СИК">
+                    <option value="Голынковский СИК">
+                    <option value="Доброселецкий СИК">
+                    <option value="Деречинский СИК">
+                    <option value="Тур Центр">
+                    <option value="Архив">
+                </datalist>
+            </div>
+
+            <div class="input-group1">
+                <input type="text" name="subject" id="editSubject" placeholder="Предмет закупки:" required>
+            </div>
+
+            <div class="input-summ">
+                <input type="number" name="amount" id="editAmount" placeholder="Сумма (руб):" step="0.01" required>
+            </div>
+
+            <button type="submit" class="button button-primary">Сохранить</button>
+            <button type="button" class="button button-secondary button-flat-red" onclick="closeEditModal()">Закрыть</button>
+        </form>
+    </div>
+</div>

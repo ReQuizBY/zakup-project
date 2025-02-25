@@ -1,0 +1,19 @@
+<div class="modal editable" id="lawyerModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Информация о юристе <i class="fas fa-pencil-alt edit-icon" onclick="toggleEditMode('lawyerModal')"></i></h2>
+        </div>
+        <div class="input-group1">
+            <label for="lawyerNumber">№:</label>
+            <input type="text" id="lawyerNumber" value="" disabled><br><br>
+            <label for="lawyerDate">Дата договора:</label>
+            <input type="date" id="lawyerDate" value="" disabled><br><br>
+            <label for="lawyerAmount">Сумма:</label>
+            <input type="number" id="lawyerAmount" value="" disabled><br><br>
+            <label for="lawyerTerm">Срок исполнения:</label>
+            <input type="text" id="lawyerTerm" value="" disabled><br><br>
+            <button type="button" class="button button-primary" onclick="saveLawyerData(currentAppId)">Сохранить</button>
+            <button type="button" class="button button-secondary button-flat-red" onclick="closeLawyerModal()">Закрыть</button>
+        </div>
+    </div>
+</div>

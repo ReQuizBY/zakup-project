@@ -1,0 +1,19 @@
+<div class="modal editable" id="economistModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Информация об экономисте <i class="fas fa-pencil-alt edit-icon" onclick="toggleEditMode('economistModal')"></i></h2>
+        </div>
+        <div class="input-group1">
+            <label for="economistFio">ФИО:</label>
+            <input type="text" id="economistFio" value="" disabled><br><br>
+            <label for="economistClassification">Классификация:</label>
+            <input type="text" id="economistClassification" value="" disabled><br><br>
+            <label for="economistDate">Дата:</label>
+            <input type="date" id="economistDate" value="" disabled><br><br>
+            <label for="economistAmount">Сумма:</label>
+            <input type="number" id="economistAmount" value="" disabled><br><br>
+            <button type="button" class="button button-primary" onclick="saveEconomistData(currentAppId)">Сохранить</button>
+            <button type="button" class="button button-secondary button-flat-red" onclick="closeEconomistModal()">Закрыть</button>
+        </div>
+    </div>
+</div>
